@@ -10,7 +10,10 @@
     <h1>PH Newspaper Archive</h1>
     <img src="{{ url_for('static', filename='images/pngwing.com.png') }}" alt="" class="center" style="display: block; margin: 0 auto;">
     <form action="/search" method="post">
-        <input type="text" id="keyword" name="keyword", placeholder="Search Keyword">
+        <div class="form-group">
+            <input type="date" id="chosen_date" name="chosen_date">
+        </div>
+        <input type="text" id="keyword" name="keyword" placeholder="Search Keyword">
         <button class="btn-search" type="submit"></button>
     </form>
 </body>
