@@ -7,10 +7,8 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Path to the CSV file
 CSV_FILE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'phnews.csv')
 
-# Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
 def read_csv(file_path):
@@ -45,16 +43,13 @@ def search_article():
         logging.debug(f"Chosen date received: {chosen_date}")
         data = read_csv(CSV_FILE_PATH)
 
-        # Filter the data using a regular expression search, ignoring case
         regex = re.compile(fr'\b{keyword}\b', re.IGNORECASE)
         results = [row for row in data if regex.search(row['article'])]
 
-        # Filter by chosen date if provided
         if chosen_date:
             chosen_date_parsed = parse_date(chosen_date)
             results = [row for row in results if parse_date(row['date']) == chosen_date_parsed]
 
-        # Sort results by date, assuming there is a 'date' column in YYYY-MM-DD format
         results.sort(key=lambda row: parse_date(row['date']), reverse=True)
         logging.debug(f"Search results: {results}")
 
